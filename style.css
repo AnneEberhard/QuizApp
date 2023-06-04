@@ -1,0 +1,138 @@
+body {
+  background-color: rgb(
+    244,
+    237,
+    255
+  ) !important; /*wichtig, da Bootstrap auch schon eine Farbe vergibt*/
+  font-family: "Rubik" !important;
+}
+
+.mainContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 90vh;
+  flex-direction: column;
+}
+
+.quizCard {
+  width: 700px;
+}
+
+.quizCardLeft {
+  background-color: rgb(24, 60, 232) !important;
+  width: 20% !important;
+  padding-top: 48px;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  flex-direction: column;
+}
+.quizCardLeft img {
+    width: 68px;
+    margin-bottom: 24px;
+}
+h6 {
+  color: rgb(104,129,255) !important;
+  margin-top: 24px !important;
+  font-size: 12px !important;
+}
+
+h6:hover {
+    color: white !important;
+    margin-top: 24px !important;
+  }
+
+  .quizCardRight {
+    width: 80% !important;
+    display: flex;
+    justify-content: center;
+    background-color: rgb(247, 247, 247);
+    height: 500px;
+  }
+  
+.init {
+  background-image: url(./img/bg\ b.png);
+  background-position: center;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  
+}  
+
+.initText {
+  cursor: pointer;
+}
+
+h5 {
+  font-weight: 700 !important;
+  text-align: center;
+  margin: 32px !important;
+}
+.answer {
+  background-color: white;
+  margin-left: 48px;
+  margin-right: 48px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-width: 0;
+  height: var(--bs-card-height);
+  color: var(--bs-body-color);
+  word-wrap: break-word;
+  background-color: var(--bs-card-bg);
+  background-clip: border-box;
+}
+
+.answer:hover {
+  cursor: pointer;
+  background-color: rgba(0,0,0,0.05);
+}
+
+.greySquare {
+  background-color: rgb(214, 214, 214);
+  font-weight: bold;
+  margin: 4px;
+  height: 40px;
+  width: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+}
+
+#footerQuizApp {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.buttonQuizApp {
+  border: none;
+  background-color: rgb(219, 224, 246);
+  border-radius: 100%;
+  height: 48px;
+  width: 48px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.green {
+  background-color: rgb(183,247,153)!important;
+}
+.letterGreen {
+  background-color: rgb(76,192,23);
+  color: white;
+}
+
+.red {
+  background-color: rgb(255,164,164) !important;
+}
+
+.letterRed {
+  background-color: rgb(248,24,24);
+  color: white;
+}
