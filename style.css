@@ -3,13 +3,13 @@ body {
     244,
     237,
     255
-  ) !important; /*wichtig, da Bootstrap auch schon eine Farbe vergibt*/
+  ) !important; /*needed since Bootstrap assigns a color too*/
   font-family: "Rubik" !important;
 }
-.progress-bar {
+
+.progress-bar { /*class is from bootstrap*/
   background-color: rgb(24, 60, 232) !important; 
 }
-
 
 .mainContainer {
   display: flex;
@@ -60,6 +60,7 @@ h6 {
   height: 500px;
 }
 
+/*style for initial page*/
 .init {
   background-image: url(./img/bg\ b.png);
   background-position: center;
@@ -75,6 +76,8 @@ h6 {
   margin-bottom: 40px;
   margin-top: 60px;
 }
+
+/*style for question pages*/
 
 h5 {
   font-weight: 700 !important;
@@ -156,6 +159,8 @@ h5 {
   background-color: rgb(248, 24, 24);
   color: white;
 }
+
+/*style for final page*/
 .final {
   display:flex;
   align-items: center;
@@ -213,4 +218,36 @@ h5 {
 
 .blue {
   color: rgb(24, 60, 232);
+}
+
+@media (max-width:720px) {
+  .quizCard {
+    width: 90vw;
+  }
+  .quizCardLeft {
+    display:none;
+  }
+  .quizCardRight {
+    width:100% !important;
+    height: min-content;
+  } 
+  .answer {
+    margin-left: 8px;
+    margin-right: 8px;
+  }
+  .circle {
+    height: 300px;
+    width: 300px;
+  }
+  .circle img {
+    height: 100px;
+    margin-bottom: 8px;
+  }
+  .final {
+    height: 500px;
+  }
+
+  .finalText{
+    font-size: 16px;
+  }
 }

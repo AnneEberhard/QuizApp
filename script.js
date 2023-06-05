@@ -107,6 +107,11 @@ let questions = [
 let currentQuestion = 0;
 let rightAnswers = 0; //not used because of navigation backward - could screw with the count
 
+let audioCorrect = new Audio('./audio/correct.mp3');
+let audioWrong = new Audio('./audio/wrong.mp3');
+let audioCheer = new Audio('./audio/cheer.wav');
+let audioHeavyCheer = new Audio('./audio/heavyCheer.mp3');
+
 function init() {
   document.getElementById(
     "quizCardRight"
@@ -114,6 +119,7 @@ function init() {
   <h2 class="initText" onclick="explanationPage()">Willkommen zum großartigen AnderlandBooks Quiz!</h2>
 </div>`;
 }
+
 
 function explanationPage() {
   document.getElementById("questionCard").innerHTML = /*html*/ `
@@ -134,12 +140,14 @@ function explanationPage() {
   `;
 }
 
+
 function startGame() {
   document.getElementById("questionCard").classList.remove("init");
   document.getElementById("questionCard").classList.remove("final");
   renderCardTemplate();
   renderCardContent();
 }
+
 
 function renderCardTemplate() {
   let card = document.getElementById("questionCard");
@@ -148,30 +156,27 @@ function renderCardTemplate() {
               <div id="answerBox1" class="answer mb-4" onclick="answer(1)">
                 <div id="letter1" class="greySquare">A</div>
                 <div class="card-body" id="answer1Id">
-                  
                 </div>
               </div>
               <div id="answerBox2" class="answer mb-4" onclick="answer(2)">
                 <div id="letter2" class="greySquare">B</div>
                 <div class="card-body" id="answer2Id">
-                  
                 </div>
               </div>
               <div id="answerBox3" class="answer mb-4" onclick="answer(3)">
                 <div id="letter3" class="greySquare">C</div>
                 <div class="card-body" id="answer3Id">
-                  
                 </div>
               </div>
               <div id="answerBox4" class="answer mb-4" onclick="answer(4)">
                 <div id="letter4" class="greySquare">D</div>
                 <div class="card-body" id="answer4Id">
-                  
                 </div>
               </div>
               <div id="footerQuizApp"></div>
     `;
 }
+
 
 function renderCardContent() {
   renderFooterCard();
@@ -180,6 +185,7 @@ function renderCardContent() {
   renderSideBar();
   renderProgressBar();
 }
+
 
 function renderFooterCard() {
   let footerCard = document.getElementById("footerQuizApp");
@@ -205,11 +211,13 @@ function renderFooterCard() {
   }
 }
 
+
 function renderQuestion() {
   let questionId = document.getElementById("questionId");
   let currentGroup = questions[currentQuestion];
   questionId.innerHTML = `${currentGroup["question"]}`;
 }
+
 
 function renderAnswers() {
   let currentGroup = questions[currentQuestion];
@@ -220,6 +228,7 @@ function renderAnswers() {
     answerLine.innerHTML = answer;
   }
 }
+
 
 function renderSideBar() {
   let currentGroup = questions[currentQuestion];
@@ -246,11 +255,12 @@ function renderSideBar() {
   }
 }
 
+
 function renderProgressBar() {
  let currentProgress = (currentQuestion)/(questions.length)*100;
- console.log(currentProgress);
  document.getElementById('progressBar').style.width = `${currentProgress}%`;
 }
+
 
 function forward() {
   if (currentQuestion != questions.length - 1) {
@@ -261,6 +271,7 @@ function forward() {
     finalSlide();
   }
 }
+
 
 function back() {
   if (currentQuestion != 0) {
@@ -273,6 +284,7 @@ function back() {
       .classList.remove("active");
   }
 }
+
 
 function answer(selection) {
   let currentGroup = questions[currentQuestion];
@@ -295,13 +307,16 @@ function answer(selection) {
   }
 }
 
+
 function correctAnswer(selection) {
   let currentGroup = questions[currentQuestion];
   currentGroup["givenAnswer"] = 1; // counting to make sure that going back and forward doesn't screw wth the count
   document.getElementById(`answerBox${selection}`).classList.add("green");
   document.getElementById(`letter${selection}`).classList.add("letterGreen");
   rightAnswers = rightAnswers + 1;
+  audioCorrect.play();
 }
+
 
 function wrongAnswer(selection, right) {
   let currentGroup = questions[currentQuestion];
@@ -310,7 +325,9 @@ function wrongAnswer(selection, right) {
   document.getElementById(`letter${right}`).classList.add("letterGreen");
   document.getElementById(`answerBox${selection}`).classList.add("red");
   document.getElementById(`letter${selection}`).classList.add("letterRed");
+  audioWrong.play();
 }
+
 
 function cleanCard() {
   for (i = 1; i < 5; i++) {
@@ -320,6 +337,7 @@ function cleanCard() {
     document.getElementById(`letter${i}`).classList.remove("letterRed");
   }
 }
+
 
 function finalSlide() {
   let finalCount = countAnswers();
@@ -341,7 +359,13 @@ function finalSlide() {
       <button class="replayButton" onclick="resetGame()">REPLAY</button>
     </div>
 `;
+if (finalCount > 3) {
+ audioHeavyCheer.play();
+} else {
+  audioCheer.play();
 }
+}
+
 
 function countAnswers() {
   let finalCount = 0;
@@ -353,9 +377,11 @@ function countAnswers() {
   return finalCount;
 }
 
+
 function shareGame() {
   alert('Jetzt wird geteilt');
 }
+
 
 function resetGame() {
   currentQuestion = 0;
