@@ -6,6 +6,10 @@ body {
   ) !important; /*wichtig, da Bootstrap auch schon eine Farbe vergibt*/
   font-family: "Rubik" !important;
 }
+.progress-bar {
+  background-color: rgb(24, 60, 232) !important; 
+}
+
 
 .mainContainer {
   display: flex;

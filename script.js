@@ -105,7 +105,7 @@ let questions = [
 ];
 
 let currentQuestion = 0;
-let rightAnswers = 0;
+let rightAnswers = 0; //not used because of navigation backward - could screw with the count
 
 function init() {
   document.getElementById(
@@ -178,6 +178,7 @@ function renderCardContent() {
   renderQuestion();
   renderAnswers();
   renderSideBar();
+  renderProgressBar();
 }
 
 function renderFooterCard() {
@@ -245,6 +246,12 @@ function renderSideBar() {
   }
 }
 
+function renderProgressBar() {
+ let currentProgress = (currentQuestion)/(questions.length)*100;
+ console.log(currentProgress);
+ document.getElementById('progressBar').style.width = `${currentProgress}%`;
+}
+
 function forward() {
   if (currentQuestion != questions.length - 1) {
     currentQuestion = currentQuestion + 1;
@@ -290,13 +297,15 @@ function answer(selection) {
 
 function correctAnswer(selection) {
   let currentGroup = questions[currentQuestion];
-  currentGroup["givenAnswer"] = 1;
+  currentGroup["givenAnswer"] = 1; // counting to make sure that going back and forward doesn't screw wth the count
   document.getElementById(`answerBox${selection}`).classList.add("green");
   document.getElementById(`letter${selection}`).classList.add("letterGreen");
   rightAnswers = rightAnswers + 1;
 }
 
 function wrongAnswer(selection, right) {
+  let currentGroup = questions[currentQuestion];
+  currentGroup["givenAnswer"] = 0; //to ensure when going back, right answer count is resetted
   document.getElementById(`answerBox${right}`).classList.add("green");
   document.getElementById(`letter${right}`).classList.add("letterGreen");
   document.getElementById(`answerBox${selection}`).classList.add("red");
@@ -316,6 +325,7 @@ function finalSlide() {
   let finalCount = countAnswers();
   document.getElementById("thriller").classList.remove("bold");
   document.getElementById("questionCard").classList.add("final");
+  document.getElementById('progressBar').style.width = `100%`;
   document.getElementById("questionCard").innerHTML = /*html*/ `
     <div class="circle">
       <img src="./img/Group 5.png">
