@@ -109,8 +109,7 @@ let rightAnswers = 0; //not used because of navigation backward - could screw wi
 
 let audioCorrect = new Audio('./audio/correct.mp3');
 let audioWrong = new Audio('./audio/wrong.mp3');
-let audioCheer = new Audio('./audio/cheer.wav');
-let audioHeavyCheer = new Audio('./audio/heavyCheer.mp3');
+let audioCheer = new Audio('./audio/heavyCheer.mp3');
 
 function init() {
   document.getElementById(
@@ -123,21 +122,16 @@ function init() {
 
 function explanationPage() {
   document.getElementById("questionCard").innerHTML = /*html*/ `
-    <h4>Es geht um folgende Bücher</h5>
-    <br>
+    <h4>Es geht um folgende Bücher</h5>    <br>
   <p>Anna K. Thomas: <b>Elfenweg</b> (Die Sänger von Thurán)<br>
     Anna K. Thomas: <b>Dämonenritt</b> (Die Kinder der Engel)<br>
     Anna K. Thomas: <b>Von Elfen und Wölfen</b><br>
     Anna K. Thomas: <b>Irrfahrt ins Gelobte Land</b><br>
     Anna K. Thomas: <b>Die Masken von Florenz</b><br>
     Anna K. Thomas: <b>Alsterdiamanten</b><br>
-    Bree Nan: <b>Unheilige Mittel</b> (Die Geschichte von Jack und Ada)<br>
-  </p>
-  <br>
-  <button class="shareButton" onclick="startGame()">Spiel beginnen</button>
-  <br>
-  <p>Vorsicht - wenn während des Spiels die Seite aktualisiert wird, geht der Fortschritt verloren!</p>
-  `;
+    Bree Nan: <b>Unheilige Mittel</b> (Die Geschichte von Jack und Ada)<br></p><br>
+  <button class="shareButton" onclick="startGame()">Spiel beginnen</button><br>
+  <p>Vorsicht - wenn während des Spiels die Seite aktualisiert wird, geht der Fortschritt verloren!</p>  `;
 }
 
 
@@ -193,21 +187,15 @@ function renderFooterCard() {
   let maxNumber = questions.length;
   footerCard.innerHTML = /*html*/ `
     <button id="backButton${currentQuestion}" onclick="back()" class="buttonQuizApp active">
-    <img
-      src="./img/arrow_back_ios_FILL1_wght700_GRAD200_opsz24.png"
-    />
+    <img src="./img/arrow_back_ios_FILL1_wght700_GRAD200_opsz24.png"/>
   </button>
   <div>${number} von ${maxNumber} Fragen</div>
   <button id="forwardButton${currentQuestion}" onclick="forward()" class="buttonQuizApp" disabled>
-    <img
-      src="./img/arrow_forward_ios_FILL1_wght700_GRAD200_opsz24.png"
-    />
+    <img src="./img/arrow_forward_ios_FILL1_wght700_GRAD200_opsz24.png"/>
   </button>
     `;
   if (currentQuestion == 0) {
-    document
-      .getElementById(`backButton${currentQuestion}`)
-      .classList.add("displayNone");
+    document.getElementById(`backButton${currentQuestion}`).classList.add("displayNone");
   }
 }
 
@@ -294,16 +282,10 @@ function answer(selection) {
   } else {
     wrongAnswer(selection, right);
   }
-  document
-    .getElementById(`forwardButton${currentQuestion}`)
-    .removeAttribute("disabled");
-  document
-    .getElementById(`forwardButton${currentQuestion}`)
-    .classList.add("active"); //don't have to remove because auf rendering
+  document.getElementById(`forwardButton${currentQuestion}`).removeAttribute("disabled");
+  document.getElementById(`forwardButton${currentQuestion}`).classList.add("active"); //don't have to remove because auf rendering
   if (currentQuestion != 0) {
-    document
-      .getElementById(`backButton${currentQuestion}`)
-      .classList.add("active"); //for first question there's no active back-button
+    document.getElementById(`backButton${currentQuestion}`).classList.add("active"); //for first question there's no active back-button
   }
 }
 
@@ -347,23 +329,15 @@ function finalSlide() {
   document.getElementById("questionCard").innerHTML = /*html*/ `
     <div class="circle">
       <img src="./img/Group 5.png">
-      <div class="finalText">FERTIG!</div>
-      <br>
+      <div class="finalText">FERTIG!</div><br>
       <div class="score">
         <div class="finalText blue">DEIN SCORE</div>
         <div class="finalText">${finalCount} / ${questions.length}</div>
-      </div>
-      <br>
-      <button class="shareButton" onclick="shareGame()">SHARE</button>
-      <br>
+      </div><br>
+      <button class="shareButton" onclick="shareGame()">SHARE</button><br>
       <button class="replayButton" onclick="resetGame()">REPLAY</button>
-    </div>
-`;
-if (finalCount > 3) {
- audioHeavyCheer.play();
-} else {
-  audioCheer.play();
-}
+    </div>`;
+ audioCheer.play();
 }
 
 

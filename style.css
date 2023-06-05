@@ -221,6 +221,10 @@ h5 {
 }
 
 @media (max-width:720px) {
+  .init {
+    background-size: contain;
+  }
+  
   .quizCard {
     width: 90vw;
   }
