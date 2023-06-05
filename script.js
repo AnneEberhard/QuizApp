@@ -10,8 +10,18 @@ let questions = [
     givenAnswer: 0,
   },
   {
+    question: "Was zeichnet Jann Deren in Elfenweg so aus, dass es danach auf Thurán legendär wird?",
+    answer1: "Seine extreme Cleverness",
+    answer2: "Seine überragende Schönheit",
+    answer3: "Seine ungewöhnlichen Zauberkräfte",
+    answer4: "Seine dickköpfige Treue",
+    rightAnswer: 4,
+    category: "Epic",
+    givenAnswer: 0,
+  },
+  {
     question:
-      "Was suchen die Dämonenjänger in Die Kinder der Engel - Dämonenritt?",
+      "Was suchen die Dämonenjäger in Die Kinder der Engel - Dämonenritt?",
     answer1: "Daniels Bruder Zacharias",
     answer2: "Daniels wirklichen Vater",
     answer3: "Den Schatz vom Silbersee",
@@ -81,19 +91,32 @@ let questions = [
     category: "Thriller",
     givenAnswer: 0,
   },
+  {
+    question:
+      "Woran leidet Ada in Unheilige Mittel im Gegensatz zu den anderen Punkten NICHT?",
+    answer1: "an einem kaputten Knie",
+    answer2: "an einer Lungenentzündung",
+    answer3: "an extremer Bitchiness",
+    answer4: "daran, von Jack zurückgelassen zu werden",
+    rightAnswer: 2,
+    category: "Thriller",
+    givenAnswer: 0,
+  },
 ];
 
 let currentQuestion = 0;
 let rightAnswers = 0;
 
 function init() {
-  document.getElementById("quizCardRight").innerHTML = /*html*/`<div class="card-body init" id="questionCard">
+  document.getElementById(
+    "quizCardRight"
+  ).innerHTML = /*html*/ `<div class="card-body init" id="questionCard">
   <h2 class="initText" onclick="explanationPage()">Willkommen zum großartigen AnderlandBooks Quiz!</h2>
 </div>`;
 }
 
 function explanationPage() {
-  document.getElementById('questionCard').innerHTML = /*html*/ `
+  document.getElementById("questionCard").innerHTML = /*html*/ `
     <h4>Es geht um folgende Bücher</h5>
     <br>
   <p>Anna K. Thomas: <b>Elfenweg</b> (Die Sänger von Thurán)<br>
@@ -105,7 +128,7 @@ function explanationPage() {
     Bree Nan: <b>Unheilige Mittel</b> (Die Geschichte von Jack und Ada)<br>
   </p>
   <br>
-  <button onclick="startGame()">Spiel beginnen</button>
+  <button class="shareButton" onclick="startGame()">Spiel beginnen</button>
   <br>
   <p>Vorsicht - wenn während des Spiels die Seite aktualisiert wird, geht der Fortschritt verloren!</p>
   `;
@@ -113,6 +136,7 @@ function explanationPage() {
 
 function startGame() {
   document.getElementById("questionCard").classList.remove("init");
+  document.getElementById("questionCard").classList.remove("final");
   renderCardTemplate();
   renderCardContent();
 }
@@ -161,7 +185,7 @@ function renderFooterCard() {
   let number = currentQuestion + 1;
   let maxNumber = questions.length;
   footerCard.innerHTML = /*html*/ `
-    <button id="backButton${currentQuestion}" onclick="back()" class="buttonQuizApp" disabled>
+    <button id="backButton${currentQuestion}" onclick="back()" class="buttonQuizApp active">
     <img
       src="./img/arrow_back_ios_FILL1_wght700_GRAD200_opsz24.png"
     />
@@ -173,9 +197,11 @@ function renderFooterCard() {
     />
   </button>
     `;
-    if (currentQuestion == 0) {
-      document.getElementById(`backButton${currentQuestion}`).classList.add('displayNone');
-    }
+  if (currentQuestion == 0) {
+    document
+      .getElementById(`backButton${currentQuestion}`)
+      .classList.add("displayNone");
+  }
 }
 
 function renderQuestion() {
@@ -236,8 +262,8 @@ function back() {
     renderCardContent();
   } else {
     document
-    .getElementById(`backButton${currentQuestion}`)
-    .classList.remove("active");
+      .getElementById(`backButton${currentQuestion}`)
+      .classList.remove("active");
   }
 }
 
@@ -253,24 +279,21 @@ function answer(selection) {
     .getElementById(`forwardButton${currentQuestion}`)
     .removeAttribute("disabled");
   document
-    .getElementById(`backButton${currentQuestion}`)
-    .removeAttribute("disabled");
-  document
     .getElementById(`forwardButton${currentQuestion}`)
     .classList.add("active"); //don't have to remove because auf rendering
- if (currentQuestion != 0) {document
-  .getElementById(`backButton${currentQuestion}`)
-  .classList.add("active"); //for first question there's no active back-button
-}
-    
+  if (currentQuestion != 0) {
+    document
+      .getElementById(`backButton${currentQuestion}`)
+      .classList.add("active"); //for first question there's no active back-button
+  }
 }
 
 function correctAnswer(selection) {
   let currentGroup = questions[currentQuestion];
-  currentGroup['givenAnswer'] = 1;
+  currentGroup["givenAnswer"] = 1;
   document.getElementById(`answerBox${selection}`).classList.add("green");
   document.getElementById(`letter${selection}`).classList.add("letterGreen");
-  rightAnswers = rightAnswers +1;
+  rightAnswers = rightAnswers + 1;
 }
 
 function wrongAnswer(selection, right) {
@@ -289,23 +312,47 @@ function cleanCard() {
   }
 }
 
-
 function finalSlide() {
-  console.log(rightAnswers); //CAVE: durch den BackButton vom Design kann dies kaputt gehen
-  let finalCount = 0;
-  for (i=0; i<questions.length; i++) {
-    let group = questions[i];
-    let countGivenAnswer = group['givenAnswer']
-    finalCount = finalCount + countGivenAnswer;
-  };
+  let finalCount = countAnswers();
   document.getElementById("thriller").classList.remove("bold");
-  document.getElementById('questionCard').innerHTML = /*html*/ `
-    <h4>Du hast folgenden Score erreicht</h5>
-    <br>
-    <p>
-    ${finalCount} von ${questions.length} Fragen!
-    </p>
-    <br>
-    <button onclick="startGame()">Spiel von neuem beginnen</button>
+  document.getElementById("questionCard").classList.add("final");
+  document.getElementById("questionCard").innerHTML = /*html*/ `
+    <div class="circle">
+      <img src="./img/Group 5.png">
+      <div class="finalText">FERTIG!</div>
+      <br>
+      <div class="score">
+        <div class="finalText blue">DEIN SCORE</div>
+        <div class="finalText">${finalCount} / ${questions.length}</div>
+      </div>
+      <br>
+      <button class="shareButton" onclick="shareGame()">SHARE</button>
+      <br>
+      <button class="replayButton" onclick="resetGame()">REPLAY</button>
+    </div>
 `;
+}
+
+function countAnswers() {
+  let finalCount = 0;
+  for (i = 0; i < questions.length; i++) {
+    let group = questions[i];
+    let countGivenAnswer = group["givenAnswer"];
+    finalCount = finalCount + countGivenAnswer;
+  }
+  return finalCount;
+}
+
+function shareGame() {
+  alert('Jetzt wird geteilt');
+}
+
+function resetGame() {
+  currentQuestion = 0;
+  finalCount = 0;
+  for (i = 0; i < questions.length; i++) {
+    let group = questions[i];
+    group["givenAnswer"] = 0;
+  }
+  startGame();
 }
