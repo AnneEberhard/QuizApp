@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./style.css" />
     <link rel="stylesheet" href="./fonts.css" />
-    <link rel="icon" type="image/x-icon" href="./img/faviconQuizApp.png"/>
+    <link rel="icon" type="image/x-icon" href="./img/faviconQuizApp.png" />
     <!--CAVE: hier doppelt eingebunden, einmal mit den Dateien über node-modules-->
     <link
       rel="stylesheet"
@@ -27,7 +27,7 @@
     <script src="script.js"></script>
     <title>QuizApp</title>
   </head>
-  <body class="myBody">
+  <body onload="init()">
     <!-- As a heading -->
     <nav class="navbar bg-body-tertiary">
       <div class="container-fluid">
@@ -43,22 +43,18 @@
               class="img-fluid rounded-start"
               alt="..."
             />
-            <div>
-              <h6>HISTORISCH</h6>
-              <h6>URBAN FANTASY</h6>
-              <h6>EPIC FANTASY</h6>
-              <h6>THRILLER</h6>
+            <div class="sideBar">
+              <h6 id="epic">EPIC FANTASY</h6>
+              <h6 id="urban">URBAN FANTASY</h6>
+              <h6 id="history">HISTORISCH</h6>
+              <h6 id="thriller">THRILLER</h6>
             </div>
           </div>
-          <div class="col-md-8 quizCardRight">
-            <div class="card-body init" id="questionCard">
-              <h2 class="initText" onclick="init()">Willkommen zum großartigen AnderlandBooks Quiz!</h2>
-            </div>
-          </div>
+          <div class="col-md-8 quizCardRight" id="quizCardRight"></div>
         </div>
       </div>
     </section>
-    <img src="./img/Option 1 Copy 7.jpg">
-    <img src="./img/v3.png">
+    <img src="./img/Option 1 Copy 7.jpg" />
+    <img src="./img/v3.png" />
   </body>
 </html>
