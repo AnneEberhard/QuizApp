@@ -6,7 +6,7 @@ let questions = [
     answer3: "Anabellánien befreien",
     answer4: "Schokolade",
     rightAnswer: 3,
-    category: "Epic",
+    categoryIndex: 1,
     givenAnswer: 0,
   },
   {
@@ -17,7 +17,7 @@ let questions = [
     answer3: "Seine ungewöhnlichen Zauberkräfte",
     answer4: "Seine dickköpfige Treue",
     rightAnswer: 4,
-    category: "Epic",
+    categoryIndex: 1,
     givenAnswer: 0,
   },
   {
@@ -28,7 +28,7 @@ let questions = [
     answer3: "Den Schatz vom Silbersee",
     answer4: "Schokolade",
     rightAnswer: 1,
-    category: "Urban",
+    categoryIndex: 2,
     givenAnswer: 0,
   },
   {
@@ -38,7 +38,7 @@ let questions = [
     answer3: "Weil er ein Tylwyth Teg ist",
     answer4: "Weil eine Hexe ihn verflucht hat",
     rightAnswer: 3,
-    category: "Urban",
+    categoryIndex: 2,
     givenAnswer: 0,
   },
   {
@@ -48,7 +48,7 @@ let questions = [
     answer3: "Ein Kind",
     answer4: "Schokolade",
     rightAnswer: 2,
-    category: "Historisch",
+    categoryIndex: 3,
     givenAnswer: 0,
   },
   {
@@ -58,7 +58,7 @@ let questions = [
     answer3: "Lorenzo de Medici",
     answer4: "Johannes von Gutenberg",
     rightAnswer: 2,
-    category: "Historisch",
+    categoryIndex: 3,
     givenAnswer: 0,
   },
   {
@@ -68,7 +68,7 @@ let questions = [
     answer3: "Um der Comtesse de Chambourg zu dienen",
     answer4: "Um sich an den Achtmanns zu rächen",
     rightAnswer: 4,
-    category: "Historisch",
+    categoryIndex: 3,
     givenAnswer: 0,
   },
   {
@@ -78,7 +78,7 @@ let questions = [
     answer3: "Die Gunst Katharinas der Großen",
     answer4: "Napoléons wahre Identität",
     rightAnswer: 1,
-    category: "Historisch",
+    categoryIndex: 3,
     givenAnswer: 0,
   },
   {
@@ -89,7 +89,7 @@ let questions = [
     answer3: "Sie sind außergewöhnlich dumm",
     answer4: "Sie haben keine Moral",
     rightAnswer: 2,
-    category: "Thriller",
+    categoryIndex: 4,
     givenAnswer: 0,
   },
   {
@@ -100,10 +100,12 @@ let questions = [
     answer3: "an extremer Bitchiness",
     answer4: "daran, von Jack zurückgelassen zu werden",
     rightAnswer: 2,
-    category: "Thriller",
+    categoryIndex: 4,
     givenAnswer: 0,
   },
 ];
+
+let category = ['placeholder1','epic','urban','history','thriller','placeholder2'];
 
 let currentQuestion = 0;
 let rightAnswers = 0; //not used because of navigation backward - could screw with the count
@@ -215,27 +217,13 @@ function renderAnswers() {
 
 function renderSideBar() {
   let currentGroup = questions[currentQuestion];
-  let category = currentGroup["category"];
-  if (category == "Epic") {
-    document.getElementById("thriller").classList.remove("bold");
-    document.getElementById("epic").classList.add("bold");
-    document.getElementById("urban").classList.remove("bold");
-  }
-  if (category == "Urban") {
-    document.getElementById("urban").classList.add("bold");
-    document.getElementById("epic").classList.remove("bold");
-    document.getElementById("history").classList.remove("bold");
-  }
-  if (category == "Historisch") {
-    document.getElementById("history").classList.add("bold");
-    document.getElementById("urban").classList.remove("bold");
-    document.getElementById("thriller").classList.remove("bold");
-  }
-  if (category == "Thriller") {
-    document.getElementById("thriller").classList.add("bold");
-    document.getElementById("history").classList.remove("bold");
-    document.getElementById("epic").classList.remove("bold");
-  }
+  let categoryIndex = currentGroup["categoryIndex"];
+  let categoryId = category[categoryIndex];
+  let categoryLastId = category[categoryIndex-1];
+  let categoryNextId = category[categoryIndex+1];
+  document.getElementById(`${categoryLastId}`).classList.remove("bold");
+  document.getElementById(`${categoryId}`).classList.add("bold");
+  document.getElementById(`${categoryNextId}`).classList.remove("bold");
 }
 
 function renderProgressBar() {
