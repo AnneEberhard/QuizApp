@@ -10,7 +10,8 @@ let questions = [
     givenAnswer: 0,
   },
   {
-    question: "Was zeichnet Jann Deren in Elfenweg so aus, dass es danach auf Thurán legendär wird?",
+    question:
+      "Was zeichnet Jann Deren in Elfenweg so aus, dass es danach auf Thurán legendär wird?",
     answer1: "Seine extreme Cleverness",
     answer2: "Seine überragende Schönheit",
     answer3: "Seine ungewöhnlichen Zauberkräfte",
@@ -107,9 +108,9 @@ let questions = [
 let currentQuestion = 0;
 let rightAnswers = 0; //not used because of navigation backward - could screw with the count
 
-let audioCorrect = new Audio('./audio/correct.mp3');
-let audioWrong = new Audio('./audio/wrong.mp3');
-let audioCheer = new Audio('./audio/heavyCheer.mp3');
+let audioCorrect = new Audio("./audio/correct.mp3");
+let audioWrong = new Audio("./audio/wrong.mp3");
+let audioCheer = new Audio("./audio/heavyCheer.mp3");
 
 function init() {
   document.getElementById(
@@ -118,7 +119,6 @@ function init() {
   <h2 class="initText" onclick="explanationPage()">Willkommen zum großartigen AnderlandBooks Quiz!</h2>
 </div>`;
 }
-
 
 function explanationPage() {
   document.getElementById("questionCard").innerHTML = /*html*/ `
@@ -134,14 +134,12 @@ function explanationPage() {
   <p>Vorsicht - wenn während des Spiels die Seite aktualisiert wird, geht der Fortschritt verloren!</p>  `;
 }
 
-
 function startGame() {
   document.getElementById("questionCard").classList.remove("init");
   document.getElementById("questionCard").classList.remove("final");
   renderCardTemplate();
   renderCardContent();
 }
-
 
 function renderCardTemplate() {
   let card = document.getElementById("questionCard");
@@ -171,7 +169,6 @@ function renderCardTemplate() {
     `;
 }
 
-
 function renderCardContent() {
   renderFooterCard();
   renderQuestion();
@@ -179,7 +176,6 @@ function renderCardContent() {
   renderSideBar();
   renderProgressBar();
 }
-
 
 function renderFooterCard() {
   let footerCard = document.getElementById("footerQuizApp");
@@ -195,17 +191,17 @@ function renderFooterCard() {
   </button>
     `;
   if (currentQuestion == 0) {
-    document.getElementById(`backButton${currentQuestion}`).classList.add("displayNone");
+    document
+      .getElementById(`backButton${currentQuestion}`)
+      .classList.add("displayNone");
   }
 }
-
 
 function renderQuestion() {
   let questionId = document.getElementById("questionId");
   let currentGroup = questions[currentQuestion];
   questionId.innerHTML = `${currentGroup["question"]}`;
 }
-
 
 function renderAnswers() {
   let currentGroup = questions[currentQuestion];
@@ -217,13 +213,12 @@ function renderAnswers() {
   }
 }
 
-
 function renderSideBar() {
   let currentGroup = questions[currentQuestion];
   let category = currentGroup["category"];
   if (category == "Epic") {
-    document.getElementById("epic").classList.add("bold");
     document.getElementById("thriller").classList.remove("bold");
+    document.getElementById("epic").classList.add("bold");
     document.getElementById("urban").classList.remove("bold");
   }
   if (category == "Urban") {
@@ -243,12 +238,10 @@ function renderSideBar() {
   }
 }
 
-
 function renderProgressBar() {
- let currentProgress = (currentQuestion)/(questions.length)*100;
- document.getElementById('progressBar').style.width = `${currentProgress}%`;
+  let currentProgress = (currentQuestion / questions.length) * 100;
+  document.getElementById("progressBar").style.width = `${currentProgress}%`;
 }
-
 
 function forward() {
   if (currentQuestion != questions.length - 1) {
@@ -259,7 +252,6 @@ function forward() {
     finalSlide();
   }
 }
-
 
 function back() {
   if (currentQuestion != 0) {
@@ -273,7 +265,6 @@ function back() {
   }
 }
 
-
 function answer(selection) {
   let currentGroup = questions[currentQuestion];
   let right = currentGroup["rightAnswer"];
@@ -282,13 +273,19 @@ function answer(selection) {
   } else {
     wrongAnswer(selection, right);
   }
-  document.getElementById(`forwardButton${currentQuestion}`).removeAttribute("disabled");
-  document.getElementById(`forwardButton${currentQuestion}`).classList.add("active"); //don't have to remove because auf rendering
+  document
+    .getElementById(`forwardButton${currentQuestion}`)
+    .removeAttribute("disabled");
+  document
+    .getElementById(`forwardButton${currentQuestion}`)
+    .classList.add("active"); //don't have to remove because auf rendering
   if (currentQuestion != 0) {
-    document.getElementById(`backButton${currentQuestion}`).classList.add("active"); //for first question there's no active back-button
+    document
+      .getElementById(`backButton${currentQuestion}`)
+      .classList.add("active"); //for first question there's no active back-button
   }
+  disableAnswerButtons();
 }
-
 
 function correctAnswer(selection) {
   let currentGroup = questions[currentQuestion];
@@ -298,7 +295,6 @@ function correctAnswer(selection) {
   rightAnswers = rightAnswers + 1;
   audioCorrect.play();
 }
-
 
 function wrongAnswer(selection, right) {
   let currentGroup = questions[currentQuestion];
@@ -310,6 +306,11 @@ function wrongAnswer(selection, right) {
   audioWrong.play();
 }
 
+function disableAnswerButtons() {
+  for (i = 1; i < 5; i++) {
+    document.getElementById(`answerBox${i}`).onclick=""; //disabled the answering function
+  }
+}
 
 function cleanCard() {
   for (i = 1; i < 5; i++) {
@@ -317,15 +318,15 @@ function cleanCard() {
     document.getElementById(`answerBox${i}`).classList.remove("red");
     document.getElementById(`letter${i}`).classList.remove("letterGreen");
     document.getElementById(`letter${i}`).classList.remove("letterRed");
+    document.getElementById(`answerBox${i}`).setAttribute(`onclick`,`answer(${i})`); //adds the answering function
   }
 }
-
 
 function finalSlide() {
   let finalCount = countAnswers();
   document.getElementById("thriller").classList.remove("bold");
   document.getElementById("questionCard").classList.add("final");
-  document.getElementById('progressBar').style.width = `100%`;
+  document.getElementById("progressBar").style.width = `100%`;
   document.getElementById("questionCard").innerHTML = /*html*/ `
     <div class="circle">
       <img src="./img/Group 5.png">
@@ -337,9 +338,8 @@ function finalSlide() {
       <button class="shareButton" onclick="shareGame()">SHARE</button><br>
       <button class="replayButton" onclick="resetGame()">REPLAY</button>
     </div>`;
- audioCheer.play();
+  audioCheer.play();
 }
-
 
 function countAnswers() {
   let finalCount = 0;
@@ -351,11 +351,9 @@ function countAnswers() {
   return finalCount;
 }
 
-
 function shareGame() {
-  alert('Jetzt wird geteilt');
+  alert("Jetzt wird geteilt");
 }
-
 
 function resetGame() {
   currentQuestion = 0;
