@@ -28,7 +28,14 @@
         <span class="navbar-brand mb-0 h1">QuizApp</span>
       </div>
     </nav>
-    <div class="progress" role="progressbar" aria-label="Basic example" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
+    <div
+      class="progress"
+      role="progressbar"
+      aria-label="Basic example"
+      aria-valuenow="100"
+      aria-valuemin="0"
+      aria-valuemax="100"
+    >
       <div id="progressBar" class="progress-bar" style="width: 0%"></div>
     </div>
     <section class="mainContainer">
@@ -39,6 +46,7 @@
               src="./img/logo 2.png"
               class="img-fluid rounded-start"
               alt="..."
+              onclick="init()"
             />
             <div class="sideBar">
               <h6 id="epic">EPIC FANTASY</h6>
@@ -46,16 +54,18 @@
               <h6 id="history">HISTORISCH</h6>
               <h6 id="thriller">THRILLER</h6>
             </div>
-            <div id="placeholder1"></div><div id="placeholder2"></div>
+            <div id="placeholder1"></div>
+            <div id="placeholder2"></div>
           </div>
           <div class="col-md-8 quizCardRight" id="quizCardRight"></div>
         </div>
-        <div id="quizCardFooter">
+        <div id="quizAppFooter">
           <img
-              src="./img/logo 2.png"
-              class="img-fluid rounded-start"
-              alt="..."
-            />
+            src="./img/logo 2.png"
+            class="img-fluid rounded-start"
+            alt="..."
+            onclick="init()"
+          />
         </div>
       </div>
     </section>

@@ -35,6 +35,7 @@ body {
 .quizCardLeft img {
   width: 68px;
   margin-bottom: 24px;
+  cursor: pointer;
 }
 .sideBar {
   width: 100%;
@@ -116,7 +117,7 @@ h5 {
   font-size: 20px;
 }
 
-#footerQuizApp {
+#footerQuizCard {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -221,7 +222,7 @@ h5 {
 }
 
 /*style for responsiveness*/
-#quizCardFooter {
+#quizAppFooter {
   display: none;
 }
 
@@ -259,7 +260,7 @@ h5 {
     font-size: 16px;
   }
 
-  #quizCardFooter {
+  #quizAppFooter {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -268,8 +269,15 @@ h5 {
     background-color: rgb(24, 60, 232);
   }
 
-  #quizCardFooter img {
+  #quizAppFooter img {
     margin: 16px;
     height: 70px;
+    cursor: pointer;
   }
+}
+
+@media (max-width:520px) {
+  .quizCardRight {
+    height:min-content;
+  } 
 }

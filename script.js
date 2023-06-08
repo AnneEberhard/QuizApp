@@ -167,7 +167,7 @@ function renderCardTemplate() {
                 <div class="card-body" id="answer4Id">
                 </div>
               </div>
-              <div id="footerQuizApp"></div>
+              <div id="footerQuizCard"></div>
     `;
 }
 
@@ -180,7 +180,7 @@ function renderCardContent() {
 }
 
 function renderFooterCard() {
-  let footerCard = document.getElementById("footerQuizApp");
+  let footerCard = document.getElementById("footerQuizCard");
   let number = currentQuestion + 1;
   let maxNumber = questions.length;
   footerCard.innerHTML = /*html*/ `
